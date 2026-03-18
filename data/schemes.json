@@ -1,0 +1,63 @@
+{
+  "schemes": [
+    {
+      "id": 1,
+      "name": "PM-KISAN",
+      "fullName": "Pradhan Mantri Kisan Samman Nidhi",
+      "description": "Direct income support of ₹6000/year to all landholding farmers",
+      "eligibility": [
+        "All landholding farmers",
+        "Valid Aadhaar card required"
+      ],
+      "documents": [
+        "Aadhaar Card",
+        "Bank Account Details",
+        "Land Records"
+      ],
+      "benefits": [
+        "₹6000 per year in 3 installments",
+        "Direct bank transfer"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "PMFBY",
+      "fullName": "Pradhan Mantri Fasal Bima Yojana",
+      "description": "Comprehensive crop insurance scheme",
+      "eligibility": [
+        "All farmers growing notified crops",
+        "Sharecroppers and tenant farmers"
+      ],
+      "documents": [
+        "Aadhaar Card",
+        "Bank Account",
+        "Land Records",
+        "Sowing Certificate"
+      ],
+      "benefits": [
+        "Coverage for crop loss",
+        "Low premium rates",
+        "Quick claim settlement"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Soil Health Card",
+      "fullName": "Soil Health Card Scheme",
+      "description": "Detailed soil analysis and recommendations",
+      "eligibility": [
+        "All farmers",
+        "Free of cost"
+      ],
+      "documents": [
+        "Land ownership proof",
+        "Aadhaar Card"
+      ],
+      "benefits": [
+        "Soil nutrient status",
+        "Fertilizer recommendations",
+        "Improved crop yield"
+      ]
+    }
+  ]
+}
