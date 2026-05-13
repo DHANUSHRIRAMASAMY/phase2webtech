@@ -3,8 +3,8 @@ const translations = {
         // Navigation
         'nav-home': 'Home',
         'nav-weather': 'Weather',
-        'nav-market': 'Market Prices',
-        'nav-calendar': 'Crop Calendar',
+        'nav-market': 'Storage Guide',
+        'nav-calendar': 'Crop Advisor',
         'nav-profit': 'Profit Predictor',
         'nav-inputs': 'Farm Inputs',
         'nav-schemes': 'Schemes',
@@ -16,10 +16,10 @@ const translations = {
         // Features
         'feature-weather': 'Weather Forecast',
         'feature-weather-desc': 'Real-time weather updates',
-        'feature-market': 'Market Prices',
-        'feature-market-desc': 'Live crop prices',
-        'feature-calendar': 'Crop Calendar',
-        'feature-calendar-desc': 'Seasonal planning guide',
+        'feature-market': 'Storage Guide',
+        'feature-market-desc': 'Proper crop storage tips',
+        'feature-calendar': 'Crop Advisor',
+        'feature-calendar-desc': 'Personalized crop recommendations',
         'feature-profit': 'Profit Calculator',
         'feature-profit-desc': 'Estimate your earnings',
         'feature-inputs': 'Farm Inputs',
@@ -39,7 +39,7 @@ const translations = {
         'market-trend': 'Trend',
         
         // Crop Calendar
-        'calendar-title': 'Seasonal Crop Calendar',
+        'calendar-title': 'Personalized Crop Advisor',
         'crop-rice': 'Rice',
         'crop-wheat': 'Wheat',
         'crop-cotton': 'Cotton',
@@ -296,15 +296,21 @@ const translations = {
         // Calendar Legend
         'legend-sowing': 'Sowing',
         'legend-fertilizer': 'Fertilizer',
-        'legend-harvest': 'Harvest'
+        'legend-harvest': 'Harvest',
+
+        // Crop Advisor
+        'advisor-state': 'Select State',
+        'advisor-month': 'Current Month',
+        'advisor-soil': 'Soil Type',
+        'advisor-placeholder': 'Select your state and soil type to get personalized crop recommendations'
     },
     
     hi: {
         // Navigation
         'nav-home': 'होम',
         'nav-weather': 'मौसम',
-        'nav-market': 'बाजार मूल्य',
-        'nav-calendar': 'फसल कैलेंडर',
+        'nav-market': 'भंडारण गाइड',
+        'nav-calendar': 'फसल सलाहकार',
         'nav-profit': 'लाभ कैलकुलेटर',
         'nav-inputs': 'कृषि सामग्री',
         'nav-schemes': 'योजनाएं',
@@ -316,10 +322,10 @@ const translations = {
         // Features
         'feature-weather': 'मौसम पूर्वानुमान',
         'feature-weather-desc': 'वास्तविक समय मौसम अपडेट',
-        'feature-market': 'बाजार मूल्य',
-        'feature-market-desc': 'लाइव फसल की कीमतें',
-        'feature-calendar': 'फसल कैलेंडर',
-        'feature-calendar-desc': 'मौसमी योजना गाइड',
+        'feature-market': 'भंडारण गाइड',
+        'feature-market-desc': 'उचित फसल भंडारण सुझाव',
+        'feature-calendar': 'फसल सलाहकार',
+        'feature-calendar-desc': 'व्यक्तिगत फसल सिफारिशें',
         'feature-profit': 'लाभ कैलकुलेटर',
         'feature-profit-desc': 'अपनी कमाई का अनुमान लगाएं',
         'feature-inputs': 'कृषि सामग्री',
@@ -339,7 +345,7 @@ const translations = {
         'market-trend': 'रुझान',
         
         // Crop Calendar
-        'calendar-title': 'मौसमी फसल कैलेंडर',
+        'calendar-title': 'व्यक्तिगत फसल सलाहकार',
         'crop-rice': 'धान',
         'crop-wheat': 'गेहूं',
         'crop-cotton': 'कपास',
@@ -596,15 +602,21 @@ const translations = {
         // Calendar Legend
         'legend-sowing': 'बुवाई',
         'legend-fertilizer': 'उर्वरक',
-        'legend-harvest': 'कटाई'
+        'legend-harvest': 'कटाई',
+
+        // Crop Advisor
+        'advisor-state': 'राज्य चुनें',
+        'advisor-month': 'वर्तमान माह',
+        'advisor-soil': 'मिट्टी का प्रकार',
+        'advisor-placeholder': 'व्यक्तिगत फसल सिफारिशें पाने के लिए अपना राज्य और मिट्टी का प्रकार चुनें'
     },
     
     ta: {
         // Navigation
         'nav-home': 'முகப்பு',
         'nav-weather': 'வானிலை',
-        'nav-market': 'சந்தை விலைகள்',
-        'nav-calendar': 'பயிர் நாட்காட்டி',
+        'nav-market': 'சேமிப்பு வழிகாட்டி',
+        'nav-calendar': 'பயிர் ஆலோசகர்',
         'nav-profit': 'லாப கணிப்பான்',
         'nav-inputs': 'விவசாய உள்ளீடுகள்',
         'nav-schemes': 'திட்டங்கள்',
@@ -616,10 +628,10 @@ const translations = {
         // Features
         'feature-weather': 'வானிலை முன்னறிவிப்பு',
         'feature-weather-desc': 'நேரடி வானிலை புதுப்பிப்புகள்',
-        'feature-market': 'சந்தை விலைகள்',
-        'feature-market-desc': 'நேரடி பயிர் விலைகள்',
-        'feature-calendar': 'பயிர் நாட்காட்டி',
-        'feature-calendar-desc': 'பருவகால திட்டமிடல் வழிகாட்டி',
+        'feature-market': 'சேமிப்பு வழிகாட்டி',
+        'feature-market-desc': 'சரியான பயிர் சேமிப்பு குறிப்புகள்',
+        'feature-calendar': 'பயிர் ஆலோசகர்',
+        'feature-calendar-desc': 'தனிப்பயன் பயிர் பரிந்துரைகள்',
         'feature-profit': 'லாப கணிப்பான்',
         'feature-profit-desc': 'உங்கள் வருவாயை மதிப்பிடுங்கள்',
         'feature-inputs': 'விவசாய உள்ளீடுகள்',
@@ -639,7 +651,7 @@ const translations = {
         'market-trend': 'போக்கு',
         
         // Crop Calendar
-        'calendar-title': 'பருவகால பயிர் நாட்காட்டி',
+        'calendar-title': 'தனிப்பயன் பயிர் ஆலோசகர்',
         'crop-rice': 'நெல்',
         'crop-wheat': 'கோதுமை',
         'crop-cotton': 'பருத்தி',
@@ -896,7 +908,13 @@ const translations = {
         // Calendar Legend
         'legend-sowing': 'விதைத்தல்',
         'legend-fertilizer': 'உரமிடுதல்',
-        'legend-harvest': 'அறுவடை'
+        'legend-harvest': 'அறுவடை',
+
+        // Crop Advisor
+        'advisor-state': 'மாநிலம் தேர்ந்தெடுக்கவும்',
+        'advisor-month': 'தற்போதைய மாதம்',
+        'advisor-soil': 'மண் வகை',
+        'advisor-placeholder': 'தனிப்பயன் பயிர் பரிந்துரைகளைப் பெற உங்கள் மாநிலம் மற்றும் மண் வகையை தேர்ந்தெடுக்கவும்'
     }
 };
 
@@ -914,20 +932,13 @@ function changeLanguage() {
             }
         }
     });
-}
 
-function changeLanguage() {
-    const lang = document.getElementById('languageSelect').value;
-    const elements = document.querySelectorAll('[data-lang]');
-    
-    elements.forEach(el => {
-        const key = el.getAttribute('data-lang');
-        if (translations[lang] && translations[lang][key]) {
-            if (el.tagName === 'INPUT') {
-                el.placeholder = translations[lang][key];
-            } else {
-                el.textContent = translations[lang][key];
-            }
-        }
-    });
+    // Re-render crop advisor in new language
+    if (typeof getCropAdvice === 'function') {
+        getCropAdvice();
+    }
+    // Re-render storage guide in new language
+    if (typeof showStorageGuide === 'function') {
+        showStorageGuide();
+    }
 }

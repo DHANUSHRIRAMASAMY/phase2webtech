@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -23,6 +24,10 @@ const limiter = rateLimit({
     message: { message: 'Too many requests. Please try again later.' }
 });
 app.use('/api/', limiter);
+
+// ─── Serve Frontend Files ─────────────────────────────────────
+// Serves all HTML, CSS, JS files from the project root
+app.use(express.static(path.join(__dirname, '..')));
 
 // ─── Routes ──────────────────────────────────────────────────
 app.use('/api/auth',     require('./routes/auth'));

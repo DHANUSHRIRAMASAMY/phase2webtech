@@ -66,8 +66,14 @@ router.get('/', async (req, res) => {
         if (error.response?.status === 404) {
             return res.status(404).json({ message: 'City not found. Please check the name.' });
         }
-        console.error('Weather API error:', error.message);
-        res.status(500).json({ message: 'Failed to fetch weather data.' });
+        if (error.response?.status === 401) {
+            return res.status(401).json({ message: 'Invalid API key. Check WEATHER_API_KEY in .env' });
+        }
+        console.error('Weather API error:', error.response?.data || error.message);
+        res.status(500).json({ 
+            message: 'Failed to fetch weather data.',
+            detail: error.response?.data?.message || error.message
+        });
     }
 });
 

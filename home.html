@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,8 +17,8 @@
             <ul class="nav-menu" id="navMenu">
                 <li><a href="home.html" class="active" data-lang="nav-home">Home</a></li>
                 <li><a href="#weather" data-lang="nav-weather">Weather</a></li>
-                <li><a href="#market" data-lang="nav-market">Market Prices</a></li>
-                <li><a href="#calendar" data-lang="nav-calendar">Crop Calendar</a></li>
+                <li><a href="#market" data-lang="nav-market">Storage Guide</a></li>
+                <li><a href="#calendar" data-lang="nav-calendar">Crop Advisor</a></li>
                 <li><a href="#profit" data-lang="nav-profit">Profit Predictor</a></li>
                 <li><a href="#inputs" data-lang="nav-inputs">Farm Inputs</a></li>
                 <li><a href="#schemes" data-lang="nav-schemes">Schemes</a></li>
@@ -58,14 +58,14 @@
                     <p data-lang="feature-weather-desc">Real-time weather updates</p>
                 </div>
                 <div class="feature-card" onclick="location.href='#market'">
-                    <i class="fas fa-chart-line"></i>
-                    <h3 data-lang="feature-market">Market Prices</h3>
-                    <p data-lang="feature-market-desc">Live crop prices</p>
+                    <i class="fas fa-warehouse"></i>
+                    <h3 data-lang="feature-market">Storage Guide</h3>
+                    <p data-lang="feature-market-desc">Proper crop storage tips</p>
                 </div>
                 <div class="feature-card" onclick="location.href='#calendar'">
-                    <i class="fas fa-calendar-alt"></i>
-                    <h3 data-lang="feature-calendar">Crop Calendar</h3>
-                    <p data-lang="feature-calendar-desc">Seasonal planning guide</p>
+                    <i class="fas fa-leaf"></i>
+                    <h3 data-lang="feature-calendar">Crop Advisor</h3>
+                    <p data-lang="feature-calendar-desc">Personalized crop recommendations</p>
                 </div>
                 <div class="feature-card" onclick="location.href='#profit'">
                     <i class="fas fa-calculator"></i>
@@ -100,54 +100,9 @@
                     </button>
                 </div>
                 <div id="weatherDisplay" class="weather-display">
-                    <div class="weather-current">
-                        <div class="weather-icon">
-                            <i class="fas fa-cloud-sun"></i>
-                        </div>
-                        <div class="weather-temp">28°C</div>
-                        <div class="weather-desc">Partly Cloudy</div>
-                        <div class="weather-location">Mumbai, India</div>
-                    </div>
-                    <div class="weather-details">
-                        <div class="weather-detail">
-                            <i class="fas fa-tint"></i>
-                            <span>Humidity: 65%</span>
-                        </div>
-                        <div class="weather-detail">
-                            <i class="fas fa-wind"></i>
-                            <span>Wind: 12 km/h</span>
-                        </div>
-                        <div class="weather-detail">
-                            <i class="fas fa-cloud-rain"></i>
-                            <span>Rain: 20%</span>
-                        </div>
-                    </div>
-                    <div class="weather-forecast">
-                        <div class="forecast-day">
-                            <div>Mon</div>
-                            <i class="fas fa-sun"></i>
-                            <div>30°C</div>
-                        </div>
-                        <div class="forecast-day">
-                            <div>Tue</div>
-                            <i class="fas fa-cloud"></i>
-                            <div>28°C</div>
-                        </div>
-                        <div class="forecast-day">
-                            <div>Wed</div>
-                            <i class="fas fa-cloud-rain"></i>
-                            <div>26°C</div>
-                        </div>
-                        <div class="forecast-day">
-                            <div>Thu</div>
-                            <i class="fas fa-cloud-sun"></i>
-                            <div>29°C</div>
-                        </div>
-                        <div class="forecast-day">
-                            <div>Fri</div>
-                            <i class="fas fa-sun"></i>
-                            <div>31°C</div>
-                        </div>
+                    <div style="text-align:center;padding:40px;color:#666;">
+                        <i class="fas fa-cloud-sun" style="font-size:3rem;color:#2d7a3e;margin-bottom:15px;"></i>
+                        <p>Enter a city name and click search to get real-time weather</p>
                     </div>
                 </div>
             </div>
@@ -156,9 +111,12 @@
 
     <section id="market" class="section bg-light">
         <div class="container">
-            <h2 class="section-title" data-lang="market-title">Market Prices</h2>
-            <div class="market-controls">
-                <select id="cropSelect" onchange="updateMarketPrices()">
+            <h2 class="section-title" data-lang="market-title">Crop Storage Guide</h2>
+            <p style="text-align:center;color:#666;margin-bottom:30px;" data-lang="storage-subtitle">Select a crop to get proper storage guidelines</p>
+
+            <div class="storage-controls">
+                <select id="storageSelect" onchange="showStorageGuide()">
+                    <option value="">-- Select a Crop --</option>
                     <option value="rice">Rice (धान / அரிசி)</option>
                     <option value="wheat">Wheat (गेहूं / கோதுமை)</option>
                     <option value="cotton">Cotton (कपास / பருத்தி)</option>
@@ -175,56 +133,102 @@
                     <option value="chilli">Chilli (मिर्च / மிளகாய்)</option>
                     <option value="banana">Banana (केला / வாழைப்பழம்)</option>
                     <option value="mango">Mango (आम / மாம்பழம்)</option>
-                    <option value="grapes">Grapes (अंगूर / திராட்சை)</option>
                     <option value="coconut">Coconut (नारियल / தேங்காய்)</option>
                     <option value="tea">Tea (चाय / தேயிலை)</option>
                     <option value="coffee">Coffee (कॉफी / காபி)</option>
+                    <option value="grapes">Grapes (अंगूर / திராட்சை)</option>
+                    <option value="garlic">Garlic (लहसुन / பூண்டு)</option>
+                    <option value="ginger">Ginger (अदरक / இஞ்சி)</option>
+                    <option value="carrot">Carrot (गाजर / கேரட்)</option>
+                    <option value="cabbage">Cabbage (पत्तागोभी / முட்டைக்கோஸ்)</option>
+                    <option value="cauliflower">Cauliflower (फूलगोभी / காலிஃப்ளவர்)</option>
+                    <option value="brinjal">Brinjal (बैंगन / கத்திரிக்காய்)</option>
+                    <option value="okra">Okra (भिंडी / வெண்டைக்காய்)</option>
+                    <option value="peas">Peas (मटर / பட்டாணி)</option>
+                    <option value="lentil">Lentil (मसूर / மசூர்)</option>
+                    <option value="sunflower">Sunflower (सूरजमुखी / சூரியகாந்தி)</option>
+                    <option value="sesame">Sesame (तिल / எள்)</option>
+                    <option value="jute">Jute (जूट / சணல்)</option>
+                    <option value="ragi">Ragi (रागी / கேழ்வரகு)</option>
+                    <option value="bajra">Bajra (बाजरा / கம்பு)</option>
+                    <option value="jowar">Jowar (ज्वार / சோளம்)</option>
+                    <option value="papaya">Papaya (पपीता / பப்பாளி)</option>
+                    <option value="guava">Guava (अमरूद / கொய்யா)</option>
+                    <option value="pomegranate">Pomegranate (अनार / மாதுளை)</option>
+                    <option value="watermelon">Watermelon (तरबूज / தர்பூசணி)</option>
                 </select>
             </div>
-            <div class="market-table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th data-lang="market-crop">Crop</th>
-                            <th data-lang="market-price">Price (₹/Quintal)</th>
-                            <th data-lang="market-location">Location</th>
-                            <th data-lang="market-trend">Trend</th>
-                        </tr>
-                    </thead>
-                    <tbody id="marketTableBody">
-                        <tr>
-                            <td>Rice</td>
-                            <td>₹2,100</td>
-                            <td>Mumbai</td>
-                            <td><span class="trend-up">↑ 5%</span></td>
-                        </tr>
-                        <tr>
-                            <td>Rice</td>
-                            <td>₹2,050</td>
-                            <td>Delhi</td>
-                            <td><span class="trend-down">↓ 2%</span></td>
-                        </tr>
-                        <tr>
-                            <td>Rice</td>
-                            <td>₹2,150</td>
-                            <td>Bangalore</td>
-                            <td><span class="trend-up">↑ 3%</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+
+            <div id="storageResult">
+                <div class="storage-placeholder">
+                    <i class="fas fa-warehouse"></i>
+                    <p data-lang="storage-placeholder">Select a crop above to see storage guidelines</p>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="calendar" class="section">
         <div class="container">
-            <h2 class="section-title" data-lang="calendar-title">Seasonal Crop Calendar</h2>
-            <div class="calendar-legend">
-                <span><span class="legend-box sowing"></span> <span data-lang="legend-sowing">Sowing</span></span>
-                <span><span class="legend-box fertilizer"></span> <span data-lang="legend-fertilizer">Fertilizer</span></span>
-                <span><span class="legend-box harvest"></span> <span data-lang="legend-harvest">Harvest</span></span>
+            <h2 class="section-title" data-lang="calendar-title">Personalized Crop Advisor</h2>
+            <div class="advisor-filters">
+                <div class="advisor-filter-group">
+                    <label data-lang="advisor-state">Select State</label>
+                    <select id="advisorState" onchange="getCropAdvice()">
+                        <option value="">-- Select State --</option>
+                        <option value="punjab">Punjab</option>
+                        <option value="haryana">Haryana</option>
+                        <option value="up">Uttar Pradesh</option>
+                        <option value="mp">Madhya Pradesh</option>
+                        <option value="maharashtra">Maharashtra</option>
+                        <option value="gujarat">Gujarat</option>
+                        <option value="rajasthan">Rajasthan</option>
+                        <option value="tamilnadu">Tamil Nadu</option>
+                        <option value="karnataka">Karnataka</option>
+                        <option value="andhra">Andhra Pradesh</option>
+                        <option value="telangana">Telangana</option>
+                        <option value="kerala">Kerala</option>
+                        <option value="wb">West Bengal</option>
+                        <option value="bihar">Bihar</option>
+                        <option value="odisha">Odisha</option>
+                    </select>
+                </div>
+                <div class="advisor-filter-group">
+                    <label data-lang="advisor-month">Current Month</label>
+                    <select id="advisorMonth" onchange="getCropAdvice()">
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+                <div class="advisor-filter-group">
+                    <label data-lang="advisor-soil">Soil Type</label>
+                    <select id="advisorSoil" onchange="getCropAdvice()">
+                        <option value="">-- Select Soil --</option>
+                        <option value="clay">Clay Soil</option>
+                        <option value="sandy">Sandy Soil</option>
+                        <option value="loamy">Loamy Soil</option>
+                        <option value="black">Black Soil</option>
+                        <option value="red">Red Soil</option>
+                    </select>
+                </div>
             </div>
-            <div class="crop-calendar">
+            <div id="advisorResults" class="advisor-results">
+                <div class="advisor-placeholder">
+                    <i class="fas fa-seedling"></i>
+                    <p data-lang="advisor-placeholder">Select your state and soil type to get personalized crop recommendations</p>
+                </div>
+            </div>
+            <div class="crop-calendar" style="display:none;">
                 <div class="calendar-row">
                     <div class="crop-name" data-lang="crop-rice">Rice</div>
                     <div class="calendar-months">
@@ -689,54 +693,37 @@
             <div class="modal-body">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                     <div class="seed-item">
-                        <div style="background: #f0f0f0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-seedling" style="font-size: 60px; color: #8b4513;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌾</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="seed-rice">Rice Seeds</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="seed-rice-use">Main staple crop, high yield varieties</span></p>
                         <p><strong data-lang="modal-season">Season:</strong> Kharif (June-July)</p>
                     </div>
-                    
                     <div class="seed-item">
-                        <div style="background: #f0f0f0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-seedling" style="font-size: 60px; color: #d4a574;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌾</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="seed-wheat">Wheat Seeds</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="seed-wheat-use">Flour production, high protein</span></p>
                         <p><strong data-lang="modal-season">Season:</strong> Rabi (Oct-Nov)</p>
                     </div>
-                    
                     <div class="seed-item">
-                        <div style="background: #f0f0f0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-seedling" style="font-size: 60px; color: #90ee90;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌿</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="seed-cotton">Cotton Seeds</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="seed-cotton-use">Textile industry, oil production</span></p>
                         <p><strong data-lang="modal-season">Season:</strong> Kharif (May-June)</p>
                     </div>
-                    
                     <div class="seed-item">
-                        <div style="background: #f0f0f0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-seedling" style="font-size: 60px; color: #ffd700;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌽</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="seed-maize">Maize Seeds</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="seed-maize-use">Food, animal feed, industrial</span></p>
                         <p><strong data-lang="modal-season">Season:</strong> Kharif & Rabi</p>
                     </div>
-                    
                     <div class="seed-item">
-                        <div style="background: #f0f0f0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-seedling" style="font-size: 60px; color: #228b22;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🥦</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="seed-vegetable">Vegetable Seeds</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="seed-veg-use">Tomato, onion, potato cultivation</span></p>
                         <p><strong data-lang="modal-season">Season:</strong> <span data-lang="season-yearround">Year-round</span></p>
                     </div>
-                    
                     <div class="seed-item">
-                        <div style="background: #f0f0f0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-seedling" style="font-size: 60px; color: #daa520;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🫘</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="seed-pulses">Pulses Seeds</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="seed-pulses-use">Protein-rich food, soil enrichment</span></p>
                         <p><strong data-lang="modal-season">Season:</strong> Rabi (Oct-Nov)</p>
@@ -766,90 +753,70 @@
             <div class="modal-body">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                     <div class="fertilizer-item">
-                        <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-flask" style="font-size: 50px; color: #1976d2;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🧪</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="fert-urea">Urea (46% N)</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="fert-urea-use">Provides nitrogen for leaf growth and green color</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="fert-urea-app">50-100 kg per acre</span></p>
                     </div>
-                    
+
                     <div class="fertilizer-item">
-                        <div style="background: #fff3e0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-flask" style="font-size: 50px; color: #f57c00;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌱</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="fert-dap">DAP (18-46-0)</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="fert-dap-use">Rich in phosphorus, promotes root development</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="fert-dap-app">40-80 kg per acre</span></p>
                     </div>
-                    
+
                     <div class="fertilizer-item">
-                        <div style="background: #fce4ec; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-flask" style="font-size: 50px; color: #c2185b;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🍎</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="fert-mop">MOP (Potash)</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="fert-mop-use">Potassium for fruit quality and disease resistance</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="fert-mop-app">30-60 kg per acre</span></p>
                     </div>
-                    
+
                     <div class="fertilizer-item">
-                        <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-flask" style="font-size: 50px; color: #7b1fa2;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">⚗️</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="fert-npk">NPK (19-19-19)</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="fert-npk-use">Balanced nutrition for overall plant growth</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="fert-npk-app">50-100 kg per acre</span></p>
                     </div>
-                    
+
                     <div class="fertilizer-item">
-                        <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-leaf" style="font-size: 50px; color: #388e3c;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🍂</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="fert-compost">Compost</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="fert-compost-use">Organic matter, improves soil structure</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="fert-compost-app">2-5 tons per acre</span></p>
                     </div>
-                    
+
                     <div class="fertilizer-item">
-                        <div style="background: #fff9c4; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-seedling" style="font-size: 50px; color: #f9a825;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🪱</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="fert-vermi">Vermicompost</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="fert-vermi-use">Rich organic fertilizer, enhances soil fertility</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="fert-vermi-app">1-2 tons per acre</span></p>
                     </div>
-                    
+
                     <div class="fertilizer-item">
-                        <div style="background: #e0f2f1; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-flask" style="font-size: 50px; color: #00796b;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🔬</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="fert-zinc">Zinc Sulphate</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="fert-zinc-use">Corrects zinc deficiency, improves crop yield</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="fert-zinc-app">10-25 kg per acre</span></p>
                     </div>
-                    
+
                     <div class="fertilizer-item">
-                        <div style="background: #ede7f6; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-flask" style="font-size: 50px; color: #512da8;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🧫</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="fert-calcium">Calcium Nitrate</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="fert-calcium-use">Provides calcium and nitrogen, prevents blossom end rot</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="fert-calcium-app">20-40 kg per acre</span></p>
                     </div>
-                    
+
                     <div class="fertilizer-item">
-                        <div style="background: #ffebee; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-flask" style="font-size: 50px; color: #d32f2f;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🟡</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="fert-sulphur">Sulphur</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="fert-sulphur-use">Essential for protein synthesis, improves oil content</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="fert-sulphur-app">15-30 kg per acre</span></p>
                     </div>
-                    
+
                     <div class="fertilizer-item">
-                        <div style="background: #e1f5fe; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-flask" style="font-size: 50px; color: #0277bd;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌸</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="fert-boron">Boron</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="fert-boron-use">Improves flowering, fruit setting, and seed formation</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="fert-boron-app">5-10 kg per acre</span></p>
@@ -879,90 +846,61 @@
             <div class="modal-body">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                     <div class="pesticide-item">
-                        <div style="background: #ffebee; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-spray-can" style="font-size: 50px; color: #c62828;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🐛</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="pest-chlorpyrifos">Chlorpyrifos</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="pest-chlorpyrifos-use">Controls termites, aphids, and soil insects</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="pest-chlorpyrifos-app">400-500 ml per acre</span></p>
                     </div>
-                    
                     <div class="pesticide-item">
-                        <div style="background: #e8eaf6; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-spray-can" style="font-size: 50px; color: #3f51b5;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🦟</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="pest-imidacloprid">Imidacloprid</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="pest-imidacloprid-use">Effective against sucking pests like whiteflies</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="pest-imidacloprid-app">100-150 ml per acre</span></p>
                     </div>
-                    
                     <div class="pesticide-item">
-                        <div style="background: #fff3e0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-spray-can" style="font-size: 50px; color: #ef6c00;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🐝</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="pest-cypermethrin">Cypermethrin</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="pest-cypermethrin-use">Controls bollworms, caterpillars, and beetles</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="pest-cypermethrin-app">200-300 ml per acre</span></p>
                     </div>
-                    
                     <div class="pesticide-item">
-                        <div style="background: #e0f2f1; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-spray-can" style="font-size: 50px; color: #00695c;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌿</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="pest-neem">Neem Oil</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="pest-neem-use">Organic pesticide for various pests and diseases</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="pest-neem-app">1-2 liters per acre</span></p>
                     </div>
-                    
                     <div class="pesticide-item">
-                        <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-spray-can" style="font-size: 50px; color: #6a1b9a;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🍄</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="pest-mancozeb">Mancozeb</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="pest-mancozeb-use">Fungicide for blight, rust, and leaf spots</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="pest-mancozeb-app">400-600 gm per acre</span></p>
                     </div>
-                    
                     <div class="pesticide-item">
-                        <div style="background: #fce4ec; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-spray-can" style="font-size: 50px; color: #ad1457;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🧬</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="pest-carbendazim">Carbendazim</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="pest-carbendazim-use">Broad-spectrum fungicide for seed treatment</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="pest-carbendazim-app">200-250 gm per acre</span></p>
                     </div>
-                    
                     <div class="pesticide-item">
-                        <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-leaf" style="font-size: 50px; color: #2e7d32;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🦠</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="pest-bt">Bacillus Thuringiensis</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="pest-bt-use">Biological pesticide for caterpillars and larvae</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="pest-bt-app">200-400 gm per acre</span></p>
                     </div>
-                    
                     <div class="pesticide-item">
-                        <div style="background: #fff9c4; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-spray-can" style="font-size: 50px; color: #f57f17;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🐞</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="pest-profenofos">Profenofos</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="pest-profenofos-use">Controls bollworms, jassids, and thrips</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="pest-profenofos-app">400-500 ml per acre</span></p>
                     </div>
-                    
                     <div class="pesticide-item">
-                        <div style="background: #e1f5fe; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-spray-can" style="font-size: 50px; color: #01579b;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌾</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="pest-glyphosate">Glyphosate</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="pest-glyphosate-use">Herbicide for weed control in crops</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="pest-glyphosate-app">1-1.5 liters per acre</span></p>
                     </div>
-                    
                     <div class="pesticide-item">
-                        <div style="background: #ede7f6; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-spray-can" style="font-size: 50px; color: #4527a0;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🦗</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="pest-acetamiprid">Acetamiprid</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="pest-acetamiprid-use">Controls aphids, jassids, and whiteflies</span></p>
                         <p><strong data-lang="modal-application">Application:</strong> <span data-lang="pest-acetamiprid-app">60-80 gm per acre</span></p>
@@ -992,90 +930,61 @@
             <div class="modal-body">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                     <div class="irrigation-item">
-                        <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-tint" style="font-size: 50px; color: #1976d2;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">💧</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="irr-drip">Drip Irrigation</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="irr-drip-use">Water-efficient system for row crops and orchards</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="irr-drip-ben">Saves 40-70% water, reduces weed growth</span></p>
                     </div>
-                    
                     <div class="irrigation-item">
-                        <div style="background: #e0f7fa; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-shower" style="font-size: 50px; color: #00838f;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🚿</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="irr-sprinkler">Sprinkler System</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="irr-sprinkler-use">Suitable for all crops, especially vegetables</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="irr-sprinkler-ben">Uniform water distribution, saves labor</span></p>
                     </div>
-                    
                     <div class="irrigation-item">
-                        <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-water" style="font-size: 50px; color: #2e7d32;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌊</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="irr-micro">Micro Sprinkler</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="irr-micro-use">Ideal for fruit trees and plantation crops</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="irr-micro-ben">Low pressure requirement, covers large area</span></p>
                     </div>
-                    
                     <div class="irrigation-item">
-                        <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-pump-soap" style="font-size: 50px; color: #6a1b9a;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">⚙️</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="irr-submersible">Submersible Pump</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="irr-submersible-use">Deep well water extraction for irrigation</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="irr-submersible-ben">High efficiency, low maintenance</span></p>
                     </div>
-                    
                     <div class="irrigation-item">
-                        <div style="background: #fff3e0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-fan" style="font-size: 50px; color: #e65100;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🔧</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="irr-centrifugal">Centrifugal Pump</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="irr-centrifugal-use">Surface water pumping for irrigation</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="irr-centrifugal-ben">Cost-effective, easy to operate</span></p>
                     </div>
-                    
                     <div class="irrigation-item">
-                        <div style="background: #fce4ec; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-solar-panel" style="font-size: 50px; color: #c2185b;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">☀️</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="irr-solar">Solar Pump</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="irr-solar-use">Eco-friendly irrigation using solar energy</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="irr-solar-ben">Zero electricity cost, environment friendly</span></p>
                     </div>
-                    
                     <div class="irrigation-item">
-                        <div style="background: #e1f5fe; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-grip-lines" style="font-size: 50px; color: #01579b;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🔩</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="irr-pipes">PVC Pipes</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="irr-pipes-use">Water distribution in irrigation systems</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="irr-pipes-ben">Durable, corrosion-resistant, lightweight</span></p>
                     </div>
-                    
                     <div class="irrigation-item">
-                        <div style="background: #fff9c4; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-filter" style="font-size: 50px; color: #f57f17;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🫧</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="irr-filter">Water Filter</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="irr-filter-use">Removes impurities from irrigation water</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="irr-filter-ben">Prevents clogging, extends system life</span></p>
                     </div>
-                    
                     <div class="irrigation-item">
-                        <div style="background: #ede7f6; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-clock" style="font-size: 50px; color: #4527a0;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">⏱️</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="irr-timer">Irrigation Timer</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="irr-timer-use">Automated irrigation scheduling</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="irr-timer-ben">Saves time, ensures timely watering</span></p>
                     </div>
-                    
                     <div class="irrigation-item">
-                        <div style="background: #ffebee; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-tachometer-alt" style="font-size: 50px; color: #c62828;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">📊</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="irr-meter">Water Meter</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="irr-meter-use">Measures water usage in irrigation</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="irr-meter-ben">Helps optimize water consumption</span></p>
@@ -1105,90 +1014,61 @@
             <div class="modal-body">
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                     <div class="machinery-item">
-                        <div style="background: #e8f5e9; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-tractor" style="font-size: 50px; color: #2e7d32;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🚜</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="mach-tractor">Tractor</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="mach-tractor-use">Primary power source for various farm operations</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="mach-tractor-ben">Versatile, reduces labor, increases efficiency</span></p>
                     </div>
-                    
                     <div class="machinery-item">
-                        <div style="background: #fff3e0; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-cog" style="font-size: 50px; color: #e65100;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">⚙️</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="mach-rotavator">Rotavator</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="mach-rotavator-use">Soil preparation, mixing crop residue</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="mach-rotavator-ben">Saves time, improves soil structure</span></p>
                     </div>
-                    
                     <div class="machinery-item">
-                        <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-seedling" style="font-size: 50px; color: #1565c0;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌱</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="mach-seeddrill">Seed Drill</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="mach-seeddrill-use">Precise seed sowing at uniform depth</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="mach-seeddrill-ben">Uniform germination, saves seeds</span></p>
                     </div>
-                    
                     <div class="machinery-item">
-                        <div style="background: #f3e5f5; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-spray-can" style="font-size: 50px; color: #6a1b9a;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">💨</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="mach-sprayer">Power Sprayer</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="mach-sprayer-use">Pesticide and fertilizer application</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="mach-sprayer-ben">Uniform coverage, saves chemicals</span></p>
                     </div>
-                    
                     <div class="machinery-item">
-                        <div style="background: #fce4ec; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-cut" style="font-size: 50px; color: #c2185b;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌾</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="mach-harvester">Harvester</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="mach-harvester-use">Crop harvesting and threshing</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="mach-harvester-ben">Fast harvesting, reduces grain loss</span></p>
                     </div>
-                    
                     <div class="machinery-item">
-                        <div style="background: #fff9c4; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-tools" style="font-size: 50px; color: #f57f17;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🔨</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="mach-cultivator">Cultivator</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="mach-cultivator-use">Weed control and soil aeration</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="mach-cultivator-ben">Improves soil health, removes weeds</span></p>
                     </div>
-                    
                     <div class="machinery-item">
-                        <div style="background: #e0f2f1; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-truck" style="font-size: 50px; color: #00695c;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌀</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="mach-thresher">Thresher</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="mach-thresher-use">Separating grains from crop stalks</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="mach-thresher-ben">Fast processing, reduces manual labor</span></p>
                     </div>
-                    
                     <div class="machinery-item">
-                        <div style="background: #ede7f6; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-wind" style="font-size: 50px; color: #4527a0;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">✂️</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="mach-chaff">Chaff Cutter</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="mach-chaff-use">Cutting fodder for livestock</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="mach-chaff-ben">Easy feeding, reduces wastage</span></p>
                     </div>
-                    
                     <div class="machinery-item">
-                        <div style="background: #ffebee; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-warehouse" style="font-size: 50px; color: #c62828;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🌡️</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="mach-dryer">Grain Dryer</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="mach-dryer-use">Drying harvested grains for storage</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="mach-dryer-ben">Prevents spoilage, maintains quality</span></p>
                     </div>
-                    
                     <div class="machinery-item">
-                        <div style="background: #e1f5fe; padding: 15px; border-radius: 8px; text-align: center;">
-                            <i class="fas fa-leaf" style="font-size: 50px; color: #01579b;"></i>
-                        </div>
+                        <div class="modal-img-placeholder">🍃</div>
                         <h3 style="margin: 10px 0; color: #2d7a3e;" data-lang="mach-mulcher">Mulcher</h3>
                         <p><strong data-lang="modal-uses">Uses:</strong> <span data-lang="mach-mulcher-use">Shredding crop residue and weeds</span></p>
                         <p><strong data-lang="modal-benefits">Benefits:</strong> <span data-lang="mach-mulcher-ben">Soil enrichment, moisture retention</span></p>
@@ -1321,6 +1201,8 @@
 
     <script src="js/main.js"></script>
     <script src="js/weather.js"></script>
+    <script src="js/crop-advisor.js"></script>
+    <script src="js/storage-guide.js"></script>
     <script src="js/language.js"></script>
     <script src="js/profit-history.js"></script>
     <script src="js/farm-calculator-history.js"></script>

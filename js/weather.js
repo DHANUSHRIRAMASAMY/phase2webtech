@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:5000/api';
+// API_URL is defined in main.js
+
 
 // Get weather by city name
 async function getWeather() {
