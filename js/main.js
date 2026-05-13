@@ -1,256 +1,81 @@
+const API_URL = 'http://localhost:5000/api';
+
+// ─── Navbar ───────────────────────────────────────────────────
 function toggleMenu() {
     document.getElementById('navMenu').classList.toggle('active');
 }
 
-function updateMarketPrices() {
+// ─── Market Prices (from backend) ────────────────────────────
+async function updateMarketPrices() {
     const crop = document.getElementById('cropSelect').value;
-    const data = {
-        rice: [
-            ['Rice', '₹2,100', 'Mumbai', '↑ 5%'],
-            ['Rice', '₹2,050', 'Delhi', '↓ 2%'],
-            ['Rice', '₹2,150', 'Bangalore', '↑ 3%'],
-            ['Rice', '₹2,080', 'Chennai', '↑ 4%'],
-            ['Rice', '₹2,120', 'Kolkata', '↑ 6%'],
-            ['Rice', '₹2,000', 'Hyderabad', '↑ 1%'],
-            ['Rice', '₹2,180', 'Pune', '↑ 7%'],
-            ['Rice', '₹2,090', 'Ahmedabad', '↑ 5%'],
-            ['Rice', '₹2,130', 'Lucknow', '↑ 4%'],
-            ['Rice', '₹2,070', 'Patna', '↑ 3%']
-        ],
-        wheat: [
-            ['Wheat', '₹1,950', 'Mumbai', '↑ 3%'],
-            ['Wheat', '₹1,900', 'Delhi', '↓ 1%'],
-            ['Wheat', '₹2,000', 'Bangalore', '↑ 5%'],
-            ['Wheat', '₹1,920', 'Jaipur', '↑ 2%'],
-            ['Wheat', '₹1,880', 'Ludhiana', '↑ 1%'],
-            ['Wheat', '₹1,970', 'Indore', '↑ 4%'],
-            ['Wheat', '₹1,930', 'Kanpur', '↑ 3%'],
-            ['Wheat', '₹1,890', 'Meerut', '↑ 2%'],
-            ['Wheat', '₹1,960', 'Bhopal', '↑ 4%'],
-            ['Wheat', '₹1,910', 'Agra', '↑ 2%']
-        ],
-        cotton: [
-            ['Cotton', '₹5,800', 'Mumbai', '↑ 7%'],
-            ['Cotton', '₹5,750', 'Delhi', '↑ 4%'],
-            ['Cotton', '₹5,900', 'Bangalore', '↑ 8%'],
-            ['Cotton', '₹5,850', 'Ahmedabad', '↑ 6%'],
-            ['Cotton', '₹5,780', 'Rajkot', '↑ 5%'],
-            ['Cotton', '₹5,920', 'Nagpur', '↑ 9%'],
-            ['Cotton', '₹5,820', 'Surat', '↑ 7%'],
-            ['Cotton', '₹5,880', 'Guntur', '↑ 8%'],
-            ['Cotton', '₹5,760', 'Yavatmal', '↑ 6%'],
-            ['Cotton', '₹5,840', 'Adilabad', '↑ 7%']
-        ],
-        sugarcane: [
-            ['Sugarcane', '₹3,200', 'Mumbai', '↑ 2%'],
-            ['Sugarcane', '₹3,150', 'Lucknow', '↓ 1%'],
-            ['Sugarcane', '₹3,250', 'Pune', '↑ 4%'],
-            ['Sugarcane', '₹3,180', 'Kolkata', '↑ 3%'],
-            ['Sugarcane', '₹3,220', 'Meerut', '↑ 3%'],
-            ['Sugarcane', '₹3,170', 'Muzaffarnagar', '↑ 2%'],
-            ['Sugarcane', '₹3,240', 'Belgaum', '↑ 4%'],
-            ['Sugarcane', '₹3,190', 'Mandya', '↑ 3%'],
-            ['Sugarcane', '₹3,210', 'Sangli', '↑ 3%'],
-            ['Sugarcane', '₹3,160', 'Gorakhpur', '↑ 1%']
-        ],
-        tomato: [
-            ['Tomato', '₹1,500', 'Mumbai', '↑ 15%'],
-            ['Tomato', '₹1,200', 'Delhi', '↓ 5%'],
-            ['Tomato', '₹1,800', 'Bangalore', '↑ 20%'],
-            ['Tomato', '₹1,350', 'Hyderabad', '↑ 8%'],
-            ['Tomato', '₹1,600', 'Chennai', '↑ 12%'],
-            ['Tomato', '₹1,400', 'Pune', '↑ 10%'],
-            ['Tomato', '₹1,250', 'Nashik', '↑ 5%'],
-            ['Tomato', '₹1,700', 'Kolar', '↑ 18%'],
-            ['Tomato', '₹1,450', 'Madurai', '↑ 11%'],
-            ['Tomato', '₹1,550', 'Coimbatore', '↑ 14%']
-        ],
-        onion: [
-            ['Onion', '₹2,500', 'Mumbai', '↑ 12%'],
-            ['Onion', '₹2,300', 'Delhi', '↑ 8%'],
-            ['Onion', '₹2,600', 'Bangalore', '↑ 15%'],
-            ['Onion', '₹2,400', 'Nashik', '↑ 10%'],
-            ['Onion', '₹2,450', 'Pune', '↑ 11%'],
-            ['Onion', '₹2,350', 'Indore', '↑ 9%'],
-            ['Onion', '₹2,550', 'Hyderabad', '↑ 13%'],
-            ['Onion', '₹2,480', 'Lasalgaon', '↑ 12%'],
-            ['Onion', '₹2,420', 'Pimpalgaon', '↑ 10%'],
-            ['Onion', '₹2,380', 'Ahmednagar', '↑ 9%']
-        ],
-        potato: [
-            ['Potato', '₹1,800', 'Mumbai', '↓ 3%'],
-            ['Potato', '₹1,650', 'Delhi', '↓ 5%'],
-            ['Potato', '₹1,900', 'Bangalore', '↑ 2%'],
-            ['Potato', '₹1,750', 'Agra', '↓ 2%'],
-            ['Potato', '₹1,700', 'Kanpur', '↓ 4%'],
-            ['Potato', '₹1,850', 'Pune', '↑ 1%'],
-            ['Potato', '₹1,680', 'Meerut', '↓ 3%'],
-            ['Potato', '₹1,780', 'Indore', '↓ 1%'],
-            ['Potato', '₹1,720', 'Jalandhar', '↓ 4%'],
-            ['Potato', '₹1,820', 'Nashik', '↑ 1%']
-        ],
-        maize: [
-            ['Maize', '₹1,750', 'Mumbai', '↑ 4%'],
-            ['Maize', '₹1,700', 'Delhi', '↑ 2%'],
-            ['Maize', '₹1,800', 'Bangalore', '↑ 6%'],
-            ['Maize', '₹1,720', 'Indore', '↑ 3%'],
-            ['Maize', '₹1,780', 'Hyderabad', '↑ 5%'],
-            ['Maize', '₹1,730', 'Davangere', '↑ 4%'],
-            ['Maize', '₹1,760', 'Nizamabad', '↑ 5%'],
-            ['Maize', '₹1,710', 'Karimnagar', '↑ 3%'],
-            ['Maize', '₹1,790', 'Gulbarga', '↑ 6%'],
-            ['Maize', '₹1,740', 'Bijapur', '↑ 4%']
-        ],
-        soybean: [
-            ['Soybean', '₹4,200', 'Mumbai', '↑ 5%'],
-            ['Soybean', '₹4,100', 'Indore', '↑ 3%'],
-            ['Soybean', '₹4,300', 'Nagpur', '↑ 7%'],
-            ['Soybean', '₹4,150', 'Bhopal', '↑ 4%'],
-            ['Soybean', '₹4,250', 'Ujjain', '↑ 6%'],
-            ['Soybean', '₹4,180', 'Dewas', '↑ 5%'],
-            ['Soybean', '₹4,220', 'Ratlam', '↑ 6%'],
-            ['Soybean', '₹4,120', 'Mandsaur', '↑ 4%'],
-            ['Soybean', '₹4,280', 'Akola', '↑ 7%'],
-            ['Soybean', '₹4,160', 'Khandwa', '↑ 5%']
-        ],
-        groundnut: [
-            ['Groundnut', '₹5,500', 'Mumbai', '↑ 6%'],
-            ['Groundnut', '₹5,400', 'Rajkot', '↑ 4%'],
-            ['Groundnut', '₹5,600', 'Bangalore', '↑ 8%'],
-            ['Groundnut', '₹5,450', 'Ahmedabad', '↑ 5%'],
-            ['Groundnut', '₹5,550', 'Junagadh', '↑ 7%'],
-            ['Groundnut', '₹5,480', 'Jamnagar', '↑ 6%'],
-            ['Groundnut', '₹5,520', 'Gondal', '↑ 7%'],
-            ['Groundnut', '₹5,420', 'Amreli', '↑ 5%'],
-            ['Groundnut', '₹5,580', 'Anantapur', '↑ 8%'],
-            ['Groundnut', '₹5,460', 'Kurnool', '↑ 6%']
-        ],
-        chickpea: [
-            ['Chickpea', '₹5,200', 'Mumbai', '↑ 3%'],
-            ['Chickpea', '₹5,100', 'Delhi', '↑ 2%'],
-            ['Chickpea', '₹5,300', 'Jaipur', '↑ 5%'],
-            ['Chickpea', '₹5,150', 'Indore', '↑ 4%'],
-            ['Chickpea', '₹5,250', 'Bhopal', '↑ 5%'],
-            ['Chickpea', '₹5,180', 'Ujjain', '↑ 4%'],
-            ['Chickpea', '₹5,220', 'Bikaner', '↑ 4%'],
-            ['Chickpea', '₹5,120', 'Kota', '↑ 3%'],
-            ['Chickpea', '₹5,280', 'Latur', '↑ 5%'],
-            ['Chickpea', '₹5,160', 'Gulbarga', '↑ 4%']
-        ],
-        mustard: [
-            ['Mustard', '₹6,500', 'Mumbai', '↑ 4%'],
-            ['Mustard', '₹6,400', 'Delhi', '↑ 3%'],
-            ['Mustard', '₹6,600', 'Jaipur', '↑ 6%'],
-            ['Mustard', '₹6,450', 'Alwar', '↑ 5%'],
-            ['Mustard', '₹6,550', 'Bharatpur', '↑ 6%'],
-            ['Mustard', '₹6,480', 'Bikaner', '↑ 5%'],
-            ['Mustard', '₹6,520', 'Sri Ganganagar', '↑ 5%'],
-            ['Mustard', '₹6,420', 'Hanumangarh', '↑ 4%'],
-            ['Mustard', '₹6,580', 'Hisar', '↑ 6%'],
-            ['Mustard', '₹6,460', 'Sirsa', '↑ 5%']
-        ],
-        turmeric: [
-            ['Turmeric', '₹8,500', 'Mumbai', '↑ 8%'],
-            ['Turmeric', '₹8,300', 'Erode', '↑ 6%'],
-            ['Turmeric', '₹8,700', 'Sangli', '↑ 10%'],
-            ['Turmeric', '₹8,400', 'Nizamabad', '↑ 7%'],
-            ['Turmeric', '₹8,600', 'Duggirala', '↑ 9%'],
-            ['Turmeric', '₹8,350', 'Salem', '↑ 7%'],
-            ['Turmeric', '₹8,650', 'Nanded', '↑ 9%'],
-            ['Turmeric', '₹8,450', 'Warangal', '↑ 8%'],
-            ['Turmeric', '₹8,550', 'Basmat', '↑ 8%'],
-            ['Turmeric', '₹8,380', 'Coimbatore', '↑ 7%']
-        ],
-        chilli: [
-            ['Chilli', '₹12,000', 'Mumbai', '↑ 15%'],
-            ['Chilli', '₹11,500', 'Guntur', '↑ 12%'],
-            ['Chilli', '₹12,500', 'Warangal', '↑ 18%'],
-            ['Chilli', '₹11,800', 'Khammam', '↑ 14%'],
-            ['Chilli', '₹12,200', 'Byadgi', '↑ 16%'],
-            ['Chilli', '₹11,700', 'Sangli', '↑ 13%'],
-            ['Chilli', '₹12,300', 'Munirabad', '↑ 17%'],
-            ['Chilli', '₹11,900', 'Bellary', '↑ 15%'],
-            ['Chilli', '₹12,400', 'Raichur', '↑ 17%'],
-            ['Chilli', '₹11,600', 'Solapur', '↑ 13%']
-        ],
-        banana: [
-            ['Banana', '₹2,000', 'Mumbai', '↑ 5%'],
-            ['Banana', '₹1,800', 'Chennai', '↑ 3%'],
-            ['Banana', '₹2,100', 'Bangalore', '↑ 7%'],
-            ['Banana', '₹1,900', 'Trichy', '↑ 4%'],
-            ['Banana', '₹2,050', 'Theni', '↑ 6%'],
-            ['Banana', '₹1,850', 'Madurai', '↑ 4%'],
-            ['Banana', '₹2,150', 'Jalgaon', '↑ 8%'],
-            ['Banana', '₹1,950', 'Coimbatore', '↑ 5%'],
-            ['Banana', '₹2,080', 'Nashik', '↑ 6%'],
-            ['Banana', '₹1,880', 'Salem', '↑ 4%']
-        ],
-        mango: [
-            ['Mango', '₹4,500', 'Mumbai', '↑ 10%'],
-            ['Mango', '₹4,200', 'Lucknow', '↑ 8%'],
-            ['Mango', '₹4,800', 'Bangalore', '↑ 12%'],
-            ['Mango', '₹4,300', 'Hyderabad', '↑ 9%'],
-            ['Mango', '₹4,600', 'Ratnagiri', '↑ 11%'],
-            ['Mango', '₹4,400', 'Krishnagiri', '↑ 10%'],
-            ['Mango', '₹4,700', 'Chittoor', '↑ 12%'],
-            ['Mango', '₹4,350', 'Malihabad', '↑ 9%'],
-            ['Mango', '₹4,550', 'Devgad', '↑ 11%'],
-            ['Mango', '₹4,250', 'Salem', '↑ 8%']
-        ],
-        grapes: [
-            ['Grapes', '₹6,000', 'Mumbai', '↑ 6%'],
-            ['Grapes', '₹5,800', 'Nashik', '↑ 5%'],
-            ['Grapes', '₹6,200', 'Pune', '↑ 8%'],
-            ['Grapes', '₹5,900', 'Sangli', '↑ 7%'],
-            ['Grapes', '₹6,100', 'Solapur', '↑ 7%'],
-            ['Grapes', '₹5,850', 'Satara', '↑ 6%'],
-            ['Grapes', '₹6,150', 'Osmanabad', '↑ 8%'],
-            ['Grapes', '₹5,950', 'Latur', '↑ 7%'],
-            ['Grapes', '₹6,050', 'Ahmednagar', '↑ 7%'],
-            ['Grapes', '₹5,880', 'Beed', '↑ 6%']
-        ],
-        coconut: [
-            ['Coconut', '₹3,500', 'Mumbai', '↑ 4%'],
-            ['Coconut', '₹3,200', 'Chennai', '↑ 2%'],
-            ['Coconut', '₹3,700', 'Bangalore', '↑ 6%'],
-            ['Coconut', '₹3,300', 'Coimbatore', '↑ 3%'],
-            ['Coconut', '₹3,600', 'Pollachi', '↑ 5%'],
-            ['Coconut', '₹3,250', 'Erode', '↑ 3%'],
-            ['Coconut', '₹3,650', 'Tiptur', '↑ 6%'],
-            ['Coconut', '₹3,350', 'Kozhikode', '↑ 4%'],
-            ['Coconut', '₹3,550', 'Kasaragod', '↑ 5%'],
-            ['Coconut', '₹3,280', 'Kochi', '↑ 3%']
-        ],
-        tea: [
-            ['Tea', '₹350', 'Mumbai', '↑ 3%'],
-            ['Tea', '₹320', 'Kolkata', '↑ 2%'],
-            ['Tea', '₹380', 'Guwahati', '↑ 5%'],
-            ['Tea', '₹340', 'Siliguri', '↑ 4%'],
-            ['Tea', '₹370', 'Jorhat', '↑ 5%'],
-            ['Tea', '₹330', 'Dibrugarh', '↑ 3%'],
-            ['Tea', '₹360', 'Tezpur', '↑ 4%'],
-            ['Tea', '₹325', 'Coimbatore', '↑ 3%'],
-            ['Tea', '₹375', 'Coonoor', '↑ 5%'],
-            ['Tea', '₹345', 'Munnar', '↑ 4%']
-        ],
-        coffee: [
-            ['Coffee', '₹8,500', 'Mumbai', '↑ 5%'],
-            ['Coffee', '₹8,200', 'Bangalore', '↑ 3%'],
-            ['Coffee', '₹8,800', 'Coorg', '↑ 7%'],
-            ['Coffee', '₹8,400', 'Chikmagalur', '↑ 6%'],
-            ['Coffee', '₹8,600', 'Hassan', '↑ 6%'],
-            ['Coffee', '₹8,300', 'Wayanad', '↑ 4%'],
-            ['Coffee', '₹8,700', 'Madikeri', '↑ 7%'],
-            ['Coffee', '₹8,450', 'Sakleshpur', '↑ 6%'],
-            ['Coffee', '₹8,550', 'Araku', '↑ 6%'],
-            ['Coffee', '₹8,350', 'Yercaud', '↑ 5%']
-        ]
+    const tbody = document.getElementById('marketTableBody');
+
+    tbody.innerHTML = `<tr><td colspan="4" style="text-align:center;padding:20px;">
+        <i class="fas fa-spinner fa-spin"></i> Loading prices...
+    </td></tr>`;
+
+    try {
+        const res = await fetch(`${API_URL}/market?crop=${crop}`);
+        const data = await res.json();
+
+        if (!res.ok || !data.prices || data.prices.length === 0) {
+            showFallbackPrices(crop);
+            return;
+        }
+
+        tbody.innerHTML = '';
+        data.prices.forEach(row => {
+            const trendValue = parseFloat(row.trend);
+            const trendDisplay = trendValue >= 0
+                ? `<span class="trend-up">↑ ${trendValue}%</span>`
+                : `<span class="trend-down">↓ ${Math.abs(trendValue)}%</span>`;
+
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.crop}</td>
+                <td>₹${parseFloat(row.price).toLocaleString()}</td>
+                <td>${row.location}</td>
+                <td>${trendDisplay}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+
+    } catch (error) {
+        console.error('Market prices error:', error);
+        showFallbackPrices(crop);
+    }
+}
+
+// Fallback static prices if backend has no data yet
+function showFallbackPrices(crop) {
+    const fallback = {
+        rice: [['Rice','₹2,100','Mumbai','↑ 5%'],['Rice','₹2,050','Delhi','↓ 2%'],['Rice','₹2,150','Bangalore','↑ 3%']],
+        wheat: [['Wheat','₹1,950','Mumbai','↑ 3%'],['Wheat','₹1,900','Delhi','↓ 1%'],['Wheat','₹2,000','Bangalore','↑ 5%']],
+        cotton: [['Cotton','₹5,800','Mumbai','↑ 7%'],['Cotton','₹5,750','Delhi','↑ 4%'],['Cotton','₹5,900','Bangalore','↑ 8%']],
+        tomato: [['Tomato','₹1,500','Mumbai','↑ 15%'],['Tomato','₹1,200','Delhi','↓ 5%'],['Tomato','₹1,800','Bangalore','↑ 20%']],
+        onion: [['Onion','₹2,500','Mumbai','↑ 12%'],['Onion','₹2,300','Delhi','↑ 8%'],['Onion','₹2,600','Bangalore','↑ 15%']],
+        potato: [['Potato','₹1,800','Mumbai','↓ 3%'],['Potato','₹1,650','Delhi','↓ 5%'],['Potato','₹1,900','Bangalore','↑ 2%']],
+        sugarcane: [['Sugarcane','₹3,200','Mumbai','↑ 2%'],['Sugarcane','₹3,150','Lucknow','↓ 1%'],['Sugarcane','₹3,250','Pune','↑ 4%']],
+        maize: [['Maize','₹1,750','Mumbai','↑ 4%'],['Maize','₹1,700','Delhi','↑ 2%'],['Maize','₹1,800','Bangalore','↑ 6%']],
+        soybean: [['Soybean','₹4,200','Mumbai','↑ 5%'],['Soybean','₹4,100','Indore','↑ 3%'],['Soybean','₹4,300','Nagpur','↑ 7%']],
+        groundnut: [['Groundnut','₹5,500','Mumbai','↑ 6%'],['Groundnut','₹5,400','Rajkot','↑ 4%'],['Groundnut','₹5,600','Bangalore','↑ 8%']],
+        chickpea: [['Chickpea','₹5,200','Mumbai','↑ 3%'],['Chickpea','₹5,100','Delhi','↑ 2%'],['Chickpea','₹5,300','Jaipur','↑ 5%']],
+        mustard: [['Mustard','₹6,500','Mumbai','↑ 4%'],['Mustard','₹6,400','Delhi','↑ 3%'],['Mustard','₹6,600','Jaipur','↑ 6%']],
+        turmeric: [['Turmeric','₹8,500','Mumbai','↑ 8%'],['Turmeric','₹8,300','Erode','↑ 6%'],['Turmeric','₹8,700','Sangli','↑ 10%']],
+        chilli: [['Chilli','₹12,000','Mumbai','↑ 15%'],['Chilli','₹11,500','Guntur','↑ 12%'],['Chilli','₹12,500','Warangal','↑ 18%']],
+        banana: [['Banana','₹2,000','Mumbai','↑ 5%'],['Banana','₹1,800','Chennai','↑ 3%'],['Banana','₹2,100','Bangalore','↑ 7%']],
+        mango: [['Mango','₹4,500','Mumbai','↑ 10%'],['Mango','₹4,200','Lucknow','↑ 8%'],['Mango','₹4,800','Bangalore','↑ 12%']],
+        grapes: [['Grapes','₹6,000','Mumbai','↑ 6%'],['Grapes','₹5,800','Nashik','↑ 5%'],['Grapes','₹6,200','Pune','↑ 8%']],
+        coconut: [['Coconut','₹3,500','Mumbai','↑ 4%'],['Coconut','₹3,200','Chennai','↑ 2%'],['Coconut','₹3,700','Bangalore','↑ 6%']],
+        tea: [['Tea','₹350','Mumbai','↑ 3%'],['Tea','₹320','Kolkata','↑ 2%'],['Tea','₹380','Guwahati','↑ 5%']],
+        coffee: [['Coffee','₹8,500','Mumbai','↑ 5%'],['Coffee','₹8,200','Bangalore','↑ 3%'],['Coffee','₹8,800','Coorg','↑ 7%']]
     };
-    
+
     const tbody = document.getElementById('marketTableBody');
     tbody.innerHTML = '';
-    
-    (data[crop] || data.rice).forEach(row => {
+    const rows = fallback[crop] || fallback.rice;
+
+    rows.forEach(row => {
         const tr = document.createElement('tr');
         tr.innerHTML = `
             <td>${row[0]}</td>
@@ -262,61 +87,214 @@ function updateMarketPrices() {
     });
 }
 
-function calculateProfit() {
+// ─── Profit Calculator (saves to backend) ────────────────────
+async function calculateProfit() {
     const crop = document.getElementById('profitCrop').value.trim();
     const land = parseFloat(document.getElementById('landArea').value);
     const yield_ = parseFloat(document.getElementById('expectedYield').value);
     const price = parseFloat(document.getElementById('marketPrice').value);
     const costPerAcre = parseFloat(document.getElementById('costPerAcre').value) || 15000;
-    
-    console.log('Calculate clicked - Inputs:', { crop, land, yield_, price, costPerAcre });
-    
-    if (!crop) {
-        alert('Please enter crop name');
-        return;
-    }
-    
-    if (!land || !yield_ || !price) {
-        alert('Please fill all fields');
-        return;
-    }
-    
+
+    if (!crop) { alert('Please enter crop name'); return; }
+    if (!land || !yield_ || !price) { alert('Please fill all fields'); return; }
+
     const production = land * yield_;
     const totalCost = land * costPerAcre;
     const revenue = production * price;
     const profit = revenue - totalCost;
-    
-    // Store current calculation for saving
-    window.currentCalculation = {
-        crop: crop,
-        land: land,
-        yield: yield_,
-        price: price,
-        costPerAcre: costPerAcre,
-        production: production,
-        totalCost: totalCost,
-        revenue: revenue,
-        profit: profit,
-        date: new Date().toISOString()
-    };
-    
-    console.log('Calculation stored:', window.currentCalculation);
-    
+
+    // Store for saving
+    window.currentCalculation = { crop, land, yield: yield_, price, costPerAcre,
+        production, totalCost, revenue, profit, date: new Date().toISOString() };
+
     document.getElementById('totalProduction').textContent = production.toFixed(2) + ' Quintals';
     document.getElementById('totalCost').textContent = '₹' + totalCost.toLocaleString();
     document.getElementById('estimatedRevenue').textContent = '₹' + revenue.toLocaleString();
     document.getElementById('expectedProfit').textContent = '₹' + profit.toLocaleString();
-    
-    // Show result box with action buttons inside
     document.getElementById('profitResult').style.display = 'block';
-    
-    console.log('Results displayed, ready to save');
 }
 
+// ─── Save Profit to Backend ───────────────────────────────────
+async function saveCalculation() {
+    if (!window.currentCalculation) {
+        alert('Please calculate first before saving!');
+        return;
+    }
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('Please login to save calculations.');
+        window.location.href = 'index.html';
+        return;
+    }
+
+    const c = window.currentCalculation;
+    const saveBtn = document.getElementById('saveBtn');
+    saveBtn.textContent = 'Saving...';
+    saveBtn.disabled = true;
+
+    try {
+        const res = await fetch(`${API_URL}/profit/calculate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                crop_name: c.crop,
+                land_area: c.land,
+                expected_yield: c.yield,
+                market_price: c.price,
+                cost_per_acre: c.costPerAcre
+            })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            alert(data.message || 'Failed to save.');
+            saveBtn.textContent = '💾 Save Details';
+            saveBtn.disabled = false;
+            return;
+        }
+
+        saveBtn.textContent = '✓ Saved!';
+        saveBtn.style.background = '#28a745';
+        setTimeout(() => {
+            saveBtn.textContent = '💾 Save Details';
+            saveBtn.style.background = '';
+            saveBtn.disabled = false;
+        }, 2000);
+
+    } catch (error) {
+        // Fallback to localStorage if backend unavailable
+        let history = JSON.parse(localStorage.getItem('profitHistory') || '[]');
+        history.unshift({ ...c, id: Date.now(), savedDate: new Date().toLocaleString() });
+        localStorage.setItem('profitHistory', JSON.stringify(history));
+        alert('Saved locally (backend unavailable).');
+        saveBtn.textContent = '💾 Save Details';
+        saveBtn.disabled = false;
+    }
+}
+
+// ─── View Profit History from Backend ────────────────────────
+async function showHistory() {
+    const token = localStorage.getItem('token');
+    const modal = document.getElementById('historyModal');
+    const content = document.getElementById('historyContent');
+
+    if (!token) {
+        // Show localStorage history if not logged in
+        const history = JSON.parse(localStorage.getItem('profitHistory') || '[]');
+        renderHistoryTable(content, history);
+        modal.classList.add('show');
+        modal.style.display = 'block';
+        return;
+    }
+
+    content.innerHTML = '<p style="text-align:center;padding:20px;"><i class="fas fa-spinner fa-spin"></i> Loading...</p>';
+    modal.classList.add('show');
+    modal.style.display = 'block';
+
+    try {
+        const res = await fetch(`${API_URL}/profit/history`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+            content.innerHTML = '<p style="text-align:center;color:red;">Failed to load history.</p>';
+            return;
+        }
+
+        renderHistoryTable(content, data.history, true);
+
+    } catch (error) {
+        // Fallback to localStorage
+        const history = JSON.parse(localStorage.getItem('profitHistory') || '[]');
+        renderHistoryTable(content, history);
+    }
+}
+
+function renderHistoryTable(content, history, fromDB = false) {
+    if (history.length === 0) {
+        content.innerHTML = `
+            <div class="no-history">
+                <i class="fas fa-history"></i>
+                <h3>No History Found</h3>
+                <p>Calculate and save your first profit calculation.</p>
+            </div>`;
+        return;
+    }
+
+    let html = `
+        <div style="margin-bottom:15px;padding:10px;background:#e8f5e9;border-radius:5px;">
+            <strong>Total Saved: ${history.length}</strong>
+        </div>
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>Date</th><th>Crop</th><th>Land (Acres)</th>
+                    <th>Price (₹/Q)</th><th>Revenue (₹)</th><th>Profit (₹)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>`;
+
+    history.forEach(item => {
+        const profitClass = (item.expected_profit || item.profit) >= 0 ? 'trend-up' : 'trend-down';
+        const profit = item.expected_profit || item.profit;
+        const revenue = item.estimated_revenue || item.revenue;
+        const date = item.calculation_date
+            ? new Date(item.calculation_date).toLocaleDateString()
+            : item.savedDate;
+
+        html += `
+            <tr>
+                <td>${date}</td>
+                <td><strong>${item.crop_name || item.crop}</strong></td>
+                <td>${item.land_area || item.land}</td>
+                <td>₹${parseFloat(item.market_price || item.price).toLocaleString()}</td>
+                <td>₹${parseFloat(revenue).toLocaleString()}</td>
+                <td class="${profitClass}">₹${parseFloat(profit).toLocaleString()}</td>
+                <td><button class="delete-btn" onclick="deleteHistory(${item.id}, ${fromDB})">Delete</button></td>
+            </tr>`;
+    });
+
+    html += '</tbody></table>';
+    content.innerHTML = html;
+}
+
+async function deleteHistory(id, fromDB) {
+    if (!confirm('Delete this record?')) return;
+
+    if (fromDB) {
+        const token = localStorage.getItem('token');
+        try {
+            await fetch(`${API_URL}/profit/history/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+        } catch (e) { console.error(e); }
+    } else {
+        let history = JSON.parse(localStorage.getItem('profitHistory') || '[]');
+        history = history.filter(item => item.id !== id);
+        localStorage.setItem('profitHistory', JSON.stringify(history));
+    }
+
+    showHistory();
+}
+
+function closeHistory() {
+    const modal = document.getElementById('historyModal');
+    modal.classList.remove('show');
+    modal.style.display = 'none';
+}
+
+// ─── Farm Calculator Tabs ─────────────────────────────────────
 function showCalcTab(tab) {
     document.querySelectorAll('.calc-tab-content').forEach(el => el.style.display = 'none');
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-    
     document.getElementById(tab + 'Calc').style.display = 'block';
     event.target.classList.add('active');
 }
@@ -325,25 +303,10 @@ function calculateSeed() {
     const crop = document.getElementById('seedCrop').value.trim();
     const land = parseFloat(document.getElementById('seedLand').value);
     const rate = parseFloat(document.getElementById('seedRate').value);
-    
-    if (!crop || !land || !rate) {
-        alert('Please fill all fields');
-        return;
-    }
-    
+    if (!crop || !land || !rate) { alert('Please fill all fields'); return; }
     const quantity = land * rate;
-    
-    // Store current calculation
-    window.currentSeedCalculation = {
-        type: 'seed',
-        crop: crop,
-        land: land,
-        rate: rate,
-        quantity: quantity,
-        date: new Date().toISOString()
-    };
-    
-    document.getElementById('seedQuantity').textContent = 'Required Seed: ' + quantity + ' kg for ' + crop;
+    window.currentSeedCalculation = { type: 'seed', crop, land, rate, quantity, date: new Date().toISOString() };
+    document.getElementById('seedQuantity').textContent = `Required Seed: ${quantity} kg for ${crop}`;
     document.getElementById('seedResult').style.display = 'block';
 }
 
@@ -352,26 +315,10 @@ function calculateFertilizer() {
     const land = parseFloat(document.getElementById('fertLand').value);
     const rate = parseFloat(document.getElementById('fertType').value);
     const fertType = document.getElementById('fertType').selectedOptions[0].text;
-    
-    if (!crop || !land || !rate) {
-        alert('Please fill all fields');
-        return;
-    }
-    
+    if (!crop || !land || !rate) { alert('Please fill all fields'); return; }
     const quantity = land * rate;
-    
-    // Store current calculation
-    window.currentFertilizerCalculation = {
-        type: 'fertilizer',
-        crop: crop,
-        land: land,
-        fertilizerType: fertType,
-        rate: rate,
-        quantity: quantity,
-        date: new Date().toISOString()
-    };
-    
-    document.getElementById('fertQuantity').textContent = 'Required Fertilizer: ' + quantity + ' kg of ' + fertType + ' for ' + crop;
+    window.currentFertilizerCalculation = { type: 'fertilizer', crop, land, fertilizerType: fertType, rate, quantity, date: new Date().toISOString() };
+    document.getElementById('fertQuantity').textContent = `Required Fertilizer: ${quantity} kg of ${fertType} for ${crop}`;
     document.getElementById('fertResult').style.display = 'block';
 }
 
@@ -380,162 +327,82 @@ function calculateWater() {
     const land = parseFloat(document.getElementById('waterLand').value);
     const rate = parseFloat(document.getElementById('waterCrop').value);
     const cropType = document.getElementById('waterCrop').selectedOptions[0].text;
-    
-    if (!crop || !land || !rate) {
-        alert('Please fill all fields');
-        return;
-    }
-    
+    if (!crop || !land || !rate) { alert('Please fill all fields'); return; }
     const quantity = land * rate;
-    
-    // Store current calculation
-    window.currentWaterCalculation = {
-        type: 'water',
-        crop: crop,
-        land: land,
-        cropType: cropType,
-        rate: rate,
-        quantity: quantity,
-        date: new Date().toISOString()
-    };
-    
-    document.getElementById('waterQuantity').textContent = 'Daily Water Requirement: ' + quantity.toLocaleString() + ' Liters for ' + crop;
+    window.currentWaterCalculation = { type: 'water', crop, land, cropType, rate, quantity, date: new Date().toISOString() };
+    document.getElementById('waterQuantity').textContent = `Daily Water Requirement: ${quantity.toLocaleString()} Liters for ${crop}`;
     document.getElementById('waterResult').style.display = 'block';
 }
 
-
-// Login/Logout functionality
+// ─── Login/Logout ─────────────────────────────────────────────
 function logout() {
     if (confirm('Are you sure you want to logout?')) {
-        // Clear user session
+        localStorage.removeItem('token');
         localStorage.removeItem('userLoggedIn');
         localStorage.removeItem('username');
-        
-        // Redirect to login page
+        localStorage.removeItem('userId');
         window.location.href = 'index.html';
     }
 }
 
-// Check if user is logged in
 function checkLoginStatus() {
     const isLoggedIn = localStorage.getItem('userLoggedIn');
     const username = localStorage.getItem('username');
-    
     const loginBtn = document.getElementById('loginBtn');
     const logoutBtn = document.getElementById('logoutBtn');
-    
-    console.log('Checking login status:', { isLoggedIn, username });
-    
+
     if (isLoggedIn === 'true' && username) {
-        // Show logout button, hide login button
         if (loginBtn) loginBtn.style.display = 'none';
         if (logoutBtn) {
             logoutBtn.style.display = 'inline-flex';
             logoutBtn.innerHTML = `<i class="fas fa-sign-out-alt"></i> Logout (${username})`;
         }
-        console.log('User is logged in - showing logout button');
     } else {
-        // Show login button, hide logout button
         if (loginBtn) loginBtn.style.display = 'inline-flex';
         if (logoutBtn) logoutBtn.style.display = 'none';
-        console.log('User is not logged in - showing login button');
     }
 }
 
-// Check login status on page load
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', checkLoginStatus);
 } else {
     checkLoginStatus();
 }
 
-// Seeds Modal Functions
-function showSeedsModal() {
-    const modal = document.getElementById('seedsModal');
+// ─── Modal Functions ──────────────────────────────────────────
+function showSeedsModal() { openModal('seedsModal'); }
+function closeSeedsModal() { closeModal('seedsModal'); }
+function showFertilizersModal() { openModal('fertilizersModal'); }
+function closeFertilizersModal() { closeModal('fertilizersModal'); }
+function showPesticidesModal() { openModal('pesticidesModal'); }
+function closePesticidesModal() { closeModal('pesticidesModal'); }
+function showIrrigationModal() { openModal('irrigationModal'); }
+function closeIrrigationModal() { closeModal('irrigationModal'); }
+function showMachineryModal() { openModal('machineryModal'); }
+function closeMachineryModal() { closeModal('machineryModal'); }
+
+function openModal(id) {
+    const modal = document.getElementById(id);
     modal.classList.add('show');
     modal.style.display = 'block';
 }
 
-function closeSeedsModal() {
-    const modal = document.getElementById('seedsModal');
+function closeModal(id) {
+    const modal = document.getElementById(id);
     modal.classList.remove('show');
     modal.style.display = 'none';
 }
 
-// Fertilizers Modal Functions
-function showFertilizersModal() {
-    const modal = document.getElementById('fertilizersModal');
-    modal.classList.add('show');
-    modal.style.display = 'block';
-}
-
-function closeFertilizersModal() {
-    const modal = document.getElementById('fertilizersModal');
-    modal.classList.remove('show');
-    modal.style.display = 'none';
-}
-
-// Pesticides Modal Functions
-function showPesticidesModal() {
-    const modal = document.getElementById('pesticidesModal');
-    modal.classList.add('show');
-    modal.style.display = 'block';
-}
-
-function closePesticidesModal() {
-    const modal = document.getElementById('pesticidesModal');
-    modal.classList.remove('show');
-    modal.style.display = 'none';
-}
-
-// Irrigation Modal Functions
-function showIrrigationModal() {
-    const modal = document.getElementById('irrigationModal');
-    modal.classList.add('show');
-    modal.style.display = 'block';
-}
-
-function closeIrrigationModal() {
-    const modal = document.getElementById('irrigationModal');
-    modal.classList.remove('show');
-    modal.style.display = 'none';
-}
-
-// Machinery Modal Functions
-function showMachineryModal() {
-    const modal = document.getElementById('machineryModal');
-    modal.classList.add('show');
-    modal.style.display = 'block';
-}
-
-function closeMachineryModal() {
-    const modal = document.getElementById('machineryModal');
-    modal.classList.remove('show');
-    modal.style.display = 'none';
-}
-
-// Close modal when clicking outside
 window.onclick = function(event) {
-    const seedsModal = document.getElementById('seedsModal');
-    const fertilizersModal = document.getElementById('fertilizersModal');
-    const pesticidesModal = document.getElementById('pesticidesModal');
-    const irrigationModal = document.getElementById('irrigationModal');
-    const machineryModal = document.getElementById('machineryModal');
-    
-    if (event.target == seedsModal) {
-        closeSeedsModal();
-    }
-    if (event.target == fertilizersModal) {
-        closeFertilizersModal();
-    }
-    if (event.target == pesticidesModal) {
-        closePesticidesModal();
-    }
-    if (event.target == irrigationModal) {
-        closeIrrigationModal();
-    }
-    if (event.target == machineryModal) {
-        closeMachineryModal();
-    }
+    ['seedsModal','fertilizersModal','pesticidesModal','irrigationModal','machineryModal','historyModal'].forEach(id => {
+        const modal = document.getElementById(id);
+        if (modal && event.target === modal) closeModal(id);
+    });
 }
 
+// Load market prices on page load
+document.addEventListener('DOMContentLoaded', function() {
+    if (document.getElementById('marketTableBody')) {
+        updateMarketPrices();
+    }
+});
